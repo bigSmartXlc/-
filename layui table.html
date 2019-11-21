@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <table id="demo" lay-filter="test"></table>
+    <script>
+             cpxx();
+      $("#search_btn").click(function(){
+          cpxx();
+      })
+      function cpxx(){
+        var evaluationDate=$("input[name='evaluationDate']").val();
+        var category=$("select[name='category']").val();
+        var subject=$("input[name='subject']").val();
+        var cityNameOrregion=$("input[name='cityNameOrregion']").val();
+        var dataStr="";
+        if(evaluationDate){
+          dataStr+='&evaluationDate='+evaluationDate
+        }
+        if(category){
+          dataStr+='&category='+category
+        }
+        if(subject){
+          dataStr+='&subject='+subject
+        }
+        if(cityNameOrregion){
+          dataStr+='&cityNameOrregion='+cityNameOrregion
+        }
+          axios.post("http://p7yjqd.natappfree.cc/user/scene/getSceneAll.action",dataStr).then(res=>{
+            console.log(res);
+            if(res.data.code==200){
+              var data1=res.data.obj.list
+              uploadtable(data1)
+          }
+        })
+      };
+          function uploadtable(data2){
+            layui.use('table', function(){
+                  var table = layui.table;
+                  //展示已知数据
+                  table.render({
+                    elem: '#demo'
+                    ,cols: [[ //标题栏
+                      {field: 'id', title: '考场ID', width:90, sort: true, fixed: 'left'}
+                      ,{field: 'evaluationAddress', title: '考试地点', width:90}
+                      ,{field: 'category', title: '分类', width:90}
+                      ,{field: 'subject', title: '科目', width:210} 
+                      ,{field: 'evaluationDate', title: '考试日期', width:110, sort: true}
+                      ,{field: 'evaluationTime', title: '考试时间', width: 160}
+                      ,{field: 'sceneName', title: '考场名称', width:105, sort: true}
+                      ,{field: 'cityName', title: '考试城市', width:105}
+                      ,{field: 'region', title: '考试区域', width: 105, sort: true}
+                    ]]
+                    ,data:data2
+                    ,even: true
+                    ,page: true //是否显示分页
+                  });
+            });
+          }    
+    </script>
+</body>
+</html>

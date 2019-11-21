@@ -1,0 +1,47 @@
+ http://code.tarena.com.cn/笔记下载
+           用户名：tarenacode   密码:code_2013
+           tmooc.cn   预习网站
+           用户名：web1810n_pm@tedu.cn  密码：tMooc2018TTS
+           
+
+
+
+           Nodejs官网    nodejs.org       nodejs.cn
+
+
+ AppID(小程序ID)     :wxbf932b8803fd71b9
+AppSecret(小程序密钥):63869c721983a026f2f5a23353234442
+小程序开发文档：https://youzan.github.io/vant-weapp/#/intro  
+		https://weui.io/
+		https://weapp.iviewui.com/
+云开发ID：web-wx-yavqu
+
+
+电影列表API：
+http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=10
+电影详情API：
+http://api.douban.com/v2/movie/subject/1088314?apikey=0df993c66c0c636e29ecbb5344252a4a	
+
+学习网站  https://www.runoob.com/	
+
+有赞微信小程序：https://youzan.github.io/vant-weapp/#/intro
+
+echart图库:https://echarts.baidu.com/feature.html
+
+jquery网页特效：http://www.17sucai.com/?tdsourcetag=s_pcqq_aiomsg
+
+
+微信订阅号appid：wx538766bbcb761790
+
+
+nodejs下载：https://npm.taobao.org/mirrors/node
+
+
+腾讯云开发者文档：https://cloud.tencent.com/developer/devdocs
+
+
+git学习：https://www.liaoxuefeng.com/wiki/896043488029600
+
+canvas学习：http://caibaojian.com/canvas/
+
+新浪云服务器部署：https://blog.csdn.net/SilenceJude/article/details/85125765

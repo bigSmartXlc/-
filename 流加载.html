@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="static/layui/layui.all.js"></script>
+    <link rel="stylesheet" href="static/layui/css/layui.css">
+</head>
+<body>
+    <div class="container" id="notice-list" style="padding: 0 5%;"></div>
+	<div style="text-align: center;margin: 20px 0;"><button type="button" class="layui-btn layui-btn-fluid  layui-btn-primary" onclick="loadnews(currentPage)">加载更多</button></div>
+    <script>
+        var currentPage = 1;
+	    var pageSize = 8;
+        var path="";
+        function loadnews(page){
+            console.log(currentPage)
+            $.get({
+                url:'http://zfu8zm.natappfree.cc/jsp/newss/findAllNews.action',
+                data: {
+                    page: currentPage,
+                    limit: pageSize
+                    },
+                    dataType: "json",
+                    success:function (data) {
+                        if(data.status == 200){
+                        console.log(data);
+                            var list = data.rows;
+                            var sum = data.datasize;
+                            for(var i=0;i<list.length;i++){
+                                var aimg ='';
+                                if(list[i].image!=null &&list[i].image!='undefined' && list[i].image!=''){
+                                    aimg = '<p><a href="notice-details.html?id='+list[i].id+'"><img src="http://zfu8zm.natappfree.cc'+path+list[i].image+'" width="100%"></a></p>';
+                                }
+                                $("#notice-list").append('<div class="art1 art_1">'+
+                                '<a class="" href="./notice-details.html?id='+list[i].id+'"><span>'+
+                                list[i].title+'</span><p>'+list[i].regtime+'</p><p>'+list[i].introduction+
+                                '</p></a>'+aimg+
+                                '</span>><a href="notice-details.html?id='+list[i].id+'"><span class="art2">查看详情</span></a></div>');
+                            }
+                        }
+            }
+            });
+            currentPage++;
+        }
+        loadnews(1);
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery.min.js"></script>
+    <script src="layui/layui.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="layui-main g-main">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                    <blockquote class="layui-elem-quote">
+                        当前系统排名：<span class="layui-badge-rim badge-number">第${scoreRecordUtil.rank}名</span>，
+                        总积分：<span class="layui-badge-rim badge-number">${scoreRecordUtil.totalScore}分</span>，
+                        和上一名相差：<span class="layui-badge-rim badge-number">${scoreRecordUtil.differenceTotal}分</span>，继续加油！
+                    </blockquote>
+                    <table class="layui-table">
+                        <thead>
+                            <tr>
+                                <th>积分类型</th>
+                                <th>积分原因</th>
+                                <th>积分值</th>
+                                <th>创建时间</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            //存放分页加载数据
+                        </tbody>
+                        
+                    </table>
+                    <div class="page"></div>
+                </div>
+            </div>
+    </div>
+     <script>
+         //异步请求数据
+         function showReocrd(pageNo,pageSize){
+            $.get("${ctxPath}/score-record/showRecord",
+                {
+                    pageNo:pageNo,
+                    pageSize:pageSize
+                },
+                function (date) {
+                    //加载后台返回的List集合数据
+                    for (var i = 0; i < date.length; i++) {
+
+                        var td = $("<td></td>").text(date[i].typeName);
+                        var td2 = $("<td></td>").text(date[i].operate);
+                        var td3 = $("<td></td>").text(date[i].score);
+                        var td4 = $("<td></td>").text(date[i].createTime);
+                        var tr = $("<tr></tr>").append(td, td2, td3, td4);
+                        $('tbody').append(tr);
+                    }
+                },
+                "json"
+            );
+        }
+        //加载总页数
+                var total = "${scoreRecordUtil.totalRecord}";
+                //先初始化加载首页，十条数据
+                showReocrd(1,10);
+                layui.use(['laypage','jquery'], function() {
+                var laypage = layui.laypage,$ = layui.$;
+                $(".page").each(function(i,the){
+                    laypage.render({
+                        elem: the //注意，这里的 test1 是 ID，不用加 # 号
+                        ,count: total //数据总数，从服务端得到
+                        , limit: 10                      //每页显示条数
+                        , limits: [10, 20, 30]
+                        , curr: 1                        //起始页
+                        , groups: 5                      //连续页码个数
+                        , prev: '上一页'                 //上一页文本
+                        , netx: '下一页'                 //下一页文本
+                        , first: 1                      //首页文本
+                        , last: 100                     //尾页文本
+                        , layout: ['prev', 'page', 'next','limit','refresh','skip']
+                        //跳转页码时调用
+                        , jump: function (obj, first) { //obj为当前页的属性和方法，第一次加载first为true
+                            //非首次加载 do something
+                            if (!first) {
+                                //清空以前加载的数据
+                                $('tbody').empty();
+                                //调用加载函数加载数据
+                                showReocrd(obj.curr,obj.limit);
+                            }
+                        }
+                    });
+                })
+                })
+     </script>       
+</body>
+</html>
