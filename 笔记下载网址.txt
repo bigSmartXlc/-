@@ -41,6 +41,7 @@ nodejsœ¬‘ÿ£∫https://npm.taobao.org/mirrors/node
 
 
 git—ßœ∞£∫https://www.liaoxuefeng.com/wiki/896043488029600
+	 https://www.cnblogs.com/sdcs/p/8270029.html
 
 canvas—ßœ∞£∫http://caibaojian.com/canvas/
 
