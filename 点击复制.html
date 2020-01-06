@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>点击复制</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>1122123123</td>
+            <td>12312312</td>
+            <td>23423423423</td>
+        </tr>
+        <tr>
+            <td>534534534</td>
+            <td>456456456</td>
+            <td>567567567</td>
+        </tr>
+        <tr>
+            <td>678678678</td>
+            <td>64545645</td>
+            <td id="copyMy">要复制的内容</td><td> <button onclick="copyFn()">点击复制</button> </td>
+        </tr>
+    </table>
+    <script>
+
+                 function copyFn(){
+        
+                    var val = document.getElementById('copyMy');
+                    window.getSelection().selectAllChildren(val);
+        
+                    document.execCommand ("Copy");
+        
+                 }
+        
+             </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery.min.js"></script>
+    <title>视频滚动播放</title>
+</head>
+<body style="text-align:center">
+    <div style="height:200vh;width: 100%;"></div>
+    <video id="video" src="http://file.qingyunbei.com/ziyunfei/file-ziyunfei/ee0829c94655479eafffac436dd176a4.mp4" controls muted style="width: 90%;"></video>
+    <script>
+var x=document.getElementById("video");
+$(window).scroll(function(){
+    var a = document.getElementById("video").offsetTop;
+    if (a >= $(window).scrollTop() && a < ($(window).scrollTop()+$(window).height())) {
+        x.play()
+    }else{
+        x.pause()
+    }
+    })
+    </script>
+</body>
+</html>

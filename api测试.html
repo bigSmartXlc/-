@@ -6,13 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="js/jquery.min.js"></script>
     <script src="js/axios.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <title>Document</title>
 </head>
 <body>
+    <input type="text">
+    <a href="" class="btn btn-primary"></a>
     <script>
-        axios.get("http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=10",function(res){
-            console.log(res);
+        $("input").keyup(function(){
+            if($("input").val().length==4){
+                console.log($("input").val());
+            }
         })
+        // axios.get("http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=10",function(res){
+        //     console.log(res);
+        // })
     </script>
 </body>
 </html>

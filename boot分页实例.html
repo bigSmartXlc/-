@@ -1,0 +1,87 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>园丁风采-全国艺术特长生测评认证湖北省办公室</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-paginator.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <p class="fytital">测评资料管理</p>
+        <ul id="loadlist">
+        </ul>
+    </div>
+	<div class="rows">
+		<center><ul class="pagination" id="mypagination">
+		</ul></center>
+	</div>
+	<script type="text/javascript">
+	    var currentPage = 1;
+	    var pageSize =2;
+	    var path="http://file.qingyunbei.com/";
+	   // var path="";
+	    function render() {
+            $("#loadlist").empty();
+	        $.ajax({
+	            url: "/exhibitionFileWeb/getExhibitionFileBySortId.action",
+	            data: {
+                    exhibitionFileSortId:28,
+                    page: currentPage,
+	              limit: pageSize
+	            },
+	            dataType: "json",
+	            success: function (data) {
+	        	console.log(data);
+	                // 将数据渲染到页面
+	                if(data.code == 200){
+	                var list=data.obj.list;var html="";
+                    var sum=data.obj.total;
+                   console.log(sum);
+                   for (var i = 0; i < list.length; i++) {
+                    html+="<li><i class='layui-icon layui-icon-form'></i><a href='"+path+list[i].outerChain+"'>"+list[i].name+"</a></li>"
+                   }
+                   $("#loadlist").append(html);
+	                    // 调用分页函数.参数:当前所在页, 总页数(用总条数 除以 每页显示多少条,在向上取整), ajax函数
+	                    if(sum!=0){
+								setPage(currentPage, Math.ceil(sum/pageSize), render);
+							}
+	                }
+	            },error:function(){
+	        		$("#teacher-list").append("抱歉,请刷新页面");
+	            }
+	        })
+	    }
+	    render();
+
+	    /**
+	     *
+	     * @param pageCurrent 当前所在页
+	     * @param pageSum 总页数
+	     * @param callback 调用ajax
+	     */
+	    function setPage(pageCurrent, pageSum, callback) {
+	        $("#mypagination").bootstrapPaginator({
+	            //设置版本号
+	            bootstrapMajorVersion: 3,
+	            // 显示第几页
+	            currentPage: pageCurrent,
+	            // 总页数
+	            totalPages: pageSum,
+	            //当单击操作按钮的时候, 执行该函数, 调用ajax渲染页面
+	            onPageClicked: function (event,originalEvent,type,page) {
+	                // 把当前点击的页码赋值给currentPage, 调用ajax,渲染页面
+	                currentPage = page
+	                callback && callback()
+	            }
+	        })
+	    }
+    </script>
+</body>
+</html>
